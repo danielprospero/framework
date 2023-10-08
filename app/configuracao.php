@@ -2,7 +2,7 @@
 
 define('APP', dirname(__FILE__));
 
-define('URL', 'http://nucleoadvance.com.br/framework/');
+define('URL', 'http://nucleoadvance.com.br/framework');
 
 define('APP_NOME', 'Framework MVC');
 

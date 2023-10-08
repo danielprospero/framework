@@ -1,20 +1,22 @@
 <?php
+session_start();
+ob_start();
 
-include_once '../app/configuracao.php';
-include_once '../app/autoload.php';
+include '../app/configuracao.php';
+include '../app/autoload.php';
 
 ?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= APP_NOME ?></title>
-    <link rel="stylesheet" href="<?= URL ?>public/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="<?= URL ?>public/bootstrap/icons/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="<?= URL ?>public/css/estilo.css">
-    <script src="<?= URL ?>public/js/color-modes.js"></script>
+    <link rel="stylesheet" href="<?= URL ?>/public/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?= URL ?>/public/bootstrap/icons/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="<?= URL ?>/public/css/estilo.css">
+    <script src="<?= URL ?>/public/js/color-modes.js"></script>
+    <script src="<?= URL ?>/public/js/funcoes.js"></script>
 
     <style>
 
@@ -58,6 +60,8 @@ include_once '../app/autoload.php';
         --bs-btn-active-border-color: #5a23c8;
       }
 
+
+
     </style>
 
 </head>
@@ -81,7 +85,7 @@ include_once '../app/autoload.php';
 
 
     <div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
-      <button class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center"
+      <button class="btn btn-primary py-2 dropdown-toggle d-flex align-items-center"
               id="bd-theme"
               type="button"
               aria-expanded="false"
@@ -129,17 +133,18 @@ include_once '../app/autoload.php';
     </symbol>
     </svg>
 
-    <?php
-        include_once  APP . '/Views/topo.php';
-        $rota = new Rota();
-        include_once APP . '/Views/rodape.php';
+<?php
 
-    ?>
+    include APP . '/Views/topo.php';
+    $rota = new Rota();
+    include APP . '/Views/rodape.php';
 
-    <script src="<?= URL ?>public/bootstrap/js/jquery.js"></script>
-    <script src="<?= URL ?>public/bootstrap/js/bootstrap.min.js"></script>
-    <script src="<?= URL ?>public/js/funcoes.js"></script>
-    <script src="<?= URL ?>public/bootstrap/js/bootstrap.bundle.min.js"></script>
+?>
+
+    <script src="<?= URL ?>/public/bootstrap/js/jquery.js"></script>
+    <script src="<?= URL ?>/public/bootstrap/js/bootstrap.min.js"></script>
+    <script src="<?= URL ?>/public/js/funcoes.js"></script>
+    <script src="<?= URL ?>/public/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>
