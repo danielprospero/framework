@@ -1,9 +1,3 @@
-<!-- <script>
-    function confirmarExclusao() {
-        return confirm("Você tem certeza que deseja deletar este post?");
-    }
-</script> -->
-
 <div class="container py-5">
     <?= Sessao::mensagem('post') ?>
     <div class="card">
@@ -29,8 +23,12 @@
                         <p class="card-text">Criado por: <?= $post->nome ?> em <?= Data::formataData($post->postDataCadastro) ?></p>
                         <?php if ($post->usuarioId == $_SESSION['usuario_id']) : ?>
                             <div class="card-body d-flex justify-content-between">
-                                <a href="<?= URL ?>/posts/editar/<?= $post->postId ?>" class="btn btn-primary">Editar</a>
-                                <a href="<?= URL ?>/posts/deletar/<?= $post->postId ?>" class="btn btn-danger float-right" onclick="return confirmarExclusao();">Deletar</a>
+                                <form action="<?= URL . '/posts/editar/' . $post->postId ?>" method="POST">
+                                    <input type="submit" class="btn btn-sm btn-primary" value="Editar">
+                                </form>
+                                <form action="<?= URL . '/posts/deletar/' . $post->postId ?>" method="POST">
+                                    <input type="submit" class="btn btn-sm btn-danger" value="Deletar" onclick="return confirmarExclusao();">
+                                </form>
                             </div>
                         <?php endif ?>
                     </div>

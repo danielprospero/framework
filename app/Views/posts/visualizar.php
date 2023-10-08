@@ -14,8 +14,12 @@
             <p class="card-text">Criado por: <?= $dados['usuario']->nome ?> em <?= Data::formataData($dados['post']->postDataCadastro) ?></p>
             <?php if ($dados['post']->usuarioId == $_SESSION['usuario_id']) : ?>
                 <div class="card-body d-flex justify-content-between">
-                    <a href="<?= URL ?>/posts/editar/<?= $dados['post']->postId ?>" class="btn btn-primary">Editar</a>
-                    <a href="<?= URL ?>/posts/deletar/<?= $dados['post']->postId ?>" class="btn btn-danger float-right" onclick="return confirmarExclusao();">Deletar</a>
+                     <form action="<?= URL . '/posts/editar/' . $dados['post']->postId ?>" method="POST">
+                            <input type="submit" class="btn btn-sm btn-primary" value="Editar">
+                    </form>
+                    <form action="<?= URL . '/posts/deletar/' . $dados['post']->postId ?>" method="POST">
+                            <input type="submit" class="btn btn-sm btn-danger" value="Deletar" onclick="return confirmarExclusao();">
+                    </form>
                 </div>
             <?php endif ?>
         </div>

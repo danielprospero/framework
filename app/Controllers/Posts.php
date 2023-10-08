@@ -4,7 +4,7 @@ class Posts extends Controller{
 
     public function __construct(){
         if(!Sessao::estaLogado()){
-            URL::redirecionar('usuarios/login');
+            Url::redirecionar('usuarios/login');
         }
         $this->postModel = $this->model('Post');
         $this->usuarioModel = $this->model('Usuario');
@@ -38,7 +38,7 @@ class Posts extends Controller{
             }else{
                 if($this->postModel->armazenar($dados)){
                     Sessao::mensagem('post', 'Post cadastrado com sucesso');
-                    URL::redirecionar('posts');
+                    Url::redirecionar('posts');
                 }else{
                     die("Erro ao armazenar o post no banco de dados");
                 }
@@ -56,6 +56,9 @@ class Posts extends Controller{
 
     public function visualizar($id){
         $post = $this->postModel->lerPostPorId($id);
+        if($post == null){
+            Url::redirecionar('paginas/error');
+        }
         $usuario = $this->usuarioModel->lerUsuarioPorId($post->usuario_id);
         $dados = [
             'post' => $post,
@@ -84,7 +87,7 @@ class Posts extends Controller{
             }else{
                 if($this->postModel->editar($dados)){
                     Sessao::mensagem('post', 'Post atualizado com sucesso');
-                    URL::redirecionar('posts');
+                    Url::redirecionar('posts');
                 }else{
                     die("Erro ao atualizar o post no banco de dados");
                 }
@@ -93,7 +96,7 @@ class Posts extends Controller{
             $post = $this->postModel->lerPostPorId($id);
             if($post->usuario_id != $_SESSION['usuario_id']){
                 Sessao::mensagem('post', 'Você não tem permissão para editar esse post', 'alert alert-danger');
-                URL::redirecionar('posts');
+                Url::redirecionar('posts');
             }
             $dados = [
                 'id' => $post->id,
@@ -107,11 +110,34 @@ class Posts extends Controller{
     }
 
     public function deletar($id){
-        if($this->postModel->deletar($id)){
-            Sessao::mensagem('post', 'Post deletado com sucesso');
-            URL::redirecionar('posts');
+
+        if(!$this->validarAutorizacao($id)){
+
+            $id = filter_var($id, FILTER_VALIDATE_INT);
+            $metado = filter_input(INPUT_SERVER, 'REQUEST_METHOD', FILTER_UNSAFE_RAW);
+            if($id && $metado == 'POST'){
+                if($this->postModel->deletar($id)){
+                    Sessao::mensagem('post', 'Post excluído com sucesso');
+                    Url::redirecionar('posts');
+                }else{
+                    die("Erro ao excluir o post no banco de dados");
+                }
+            }
+            
         }else{
-            die("Erro ao deletar o post no banco de dados");
+            Sessao::mensagem('post', 'Você não tem permissão para excluir esse post', 'alert alert-danger');
+            Url::redirecionar('posts');
+        }
+
+    }
+
+    private function validarAutorizacao($id){
+
+        $post = $this->postModel->lerPostPorId($id);
+        if($post->usuario_id != $_SESSION['usuario_id']){
+            return true;
+        }else{
+            return false;
         }
     }
     

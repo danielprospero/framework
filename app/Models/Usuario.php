@@ -19,6 +19,20 @@ class Usuario {
         }
     }
 
+    public function atualizar($dados) {
+        $this->db->query("UPDATE usuarios SET nome = :nome, email = :email, senha = :senha, biografia = :biografia, modificado_em = NOW() WHERE id = :id");
+        $this->db->bind(":id", $dados['id']);
+        $this->db->bind(":nome", $dados['nome']);
+        $this->db->bind(":email", $dados['email']);
+        $this->db->bind(":senha", $dados['senha']);
+        $this->db->bind(":biografia", $dados['biografia']);
+        if ($this->db->executa()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function verificarEmailExiste($email){
         $this->db->query("SELECT email FROM usuarios WHERE email = :email");
         $this->db->bind(":email", $email);

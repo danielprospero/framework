@@ -4,7 +4,7 @@ class Paginas extends Controller{
 
     public function index(){
         if(Sessao::estaLogado()){
-            URL::redirecionar('posts');
+            Url::redirecionar('posts');
         }
 
         $dados = [
@@ -23,6 +23,16 @@ class Paginas extends Controller{
         ];
 
         $this->view('paginas/sobre', $dados);
+
+    }
+
+    public function error(){
+        $dados = [
+            'tituloPagina' => 'Página não encontrada',
+            'texto' => 'A página que você está procurando não existe'
+        ];
+
+        $this->view('paginas/error', $dados);
 
     }
     

@@ -25,7 +25,7 @@
               <li><p class="dropdown-item">Olá, <?php echo explode(' ', $_SESSION['usuario_nome'])[0];?></p></li>
               <li><a class="dropdown-item" href="#">New project...</a></li>
               <li><a class="dropdown-item" href="#">Settings</a></li>
-              <li><a class="dropdown-item" href="#">Perfil</a></li>
+              <li><a class="dropdown-item" href="<?= URL ?>/usuarios/perfil/<?= $_SESSION['usuario_id'] ?>">Perfil</a></li>
               <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item" href="<?= URL ?>/usuarios/sair">Sair</a></li>
             </ul>

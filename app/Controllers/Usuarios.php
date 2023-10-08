@@ -6,6 +6,90 @@ class Usuarios extends Controller{
         $this->usuarioModel = $this->model('Usuario');
     }
 
+    public function perfil($id){
+        //busca o usuario no model pelo seu ID
+        $usuario = $this->usuarioModel->lerUsuarioPorId($id);
+
+        //recebe os dados do formulario e os filtra
+        $formulario = filter_input_array(INPUT_POST, FILTER_UNSAFE_RAW);
+        if (isset($formulario)){
+            //define os dados
+            $dados = [
+                'id' => $id,
+                'nome' => trim($formulario['nome']),
+                'email' => trim($formulario['email']),
+                'senha' => trim($formulario['senha']),
+                'biografia' => trim($formulario['biografia']),
+            ];
+            //checa se o campo de senha está vazio 
+            if (empty($formulario['senha'])){
+                //define a senha como a senha do usuario no banco de dados
+                $dados['senha'] = $usuario->senha;
+            }elseif (strlen($formulario['senha']) < 6){
+                //checa se a senha tem menos de 6 caracteres
+                $dados['senha_erro'] = 'O campo senha deve ter no mínimo 6 caracteres';
+            }elseif ($formulario['senha'] != $formulario['confirma_senha']){
+                //checa se a senha é diferente da confirmação de senha
+            $dados['confirma_senha_erro'] = 'O campo confirmar senha deve ser igual ao campo senha';
+            }else{
+                //se o campo de senha não estiver vazio codifica a senha
+                $dados['senha'] = password_hash($formulario['senha'], PASSWORD_DEFAULT);
+            }
+
+            //se a biografia estivar vazia recebe a mesma biografia do banco
+            if (empty($formulario['biografia'])){
+                $dados['biografia'] = $usuario->biografia;
+            }
+
+            //checa se existe campos em branco
+            if (in_array("", $dados)){
+
+                if (empty($formulario['nome'])){
+                    $dados['nome_erro'] = 'Preencha o campo nome';
+                }
+
+                if (empty($formulario['email'])){
+                    $dados['email_erro'] = 'Preencha o campo e-mail';
+                }
+
+            } else {
+                //checa se o email do formulario é igual do usuario no banco de dados
+                if ($formulario['email'] == $usuario->email){
+                    $this->usuarioModel->atualizar($dados);
+                    Sessao::mensagem('usuario', 'Perfil atualizado com sucesso');
+                //checa se o email do formulario é diferente do usuario no banco de dados
+                } elseif (!$this->usuarioModel->checarEmail($formulario['email'])) {
+                    $this->usuarioModel->atualizar($dados);
+                    Sessao::mensagem('usuario', 'Perfil atualizado com sucesso');
+                }else{
+                    $dados['email_erro'] = 'O e-mail informado já está cadastrado';
+                }
+            }   
+
+        }else{
+                //verifica se o usuario tem autorização para editar seu perfil
+                if ($usuario->id != $_SESSION['usuario_id']){
+                    Sessao::mensagem('post', 'Você não tem autorização para editar esse perfil', 'alert alert-danger');
+                    Url::redirecionar('posts');
+                }
+
+                //define os dados da view
+                $dados = [
+                    'id' => $usuario->id,
+                    'nome' => $usuario->nome,
+                    'email' => $usuario->email,
+                    'biografia' => $usuario->biografia,
+                    'nome_erro' => '',
+                    'email_erro' => '',
+                    'senha_erro' => ''
+                ];
+
+            }   
+            //define o arquivo de view 
+            $this->view('usuarios/perfil', $dados);
+    }
+        
+
     public function cadastrar(){
 
         $formulario = filter_input_array(INPUT_POST, FILTER_UNSAFE_RAW);
@@ -53,7 +137,7 @@ class Usuarios extends Controller{
                     if($this->usuarioModel->armazenar($dados)){
  
                         Sessao::mensagem('usuario', 'Usuário cadastrado com sucesso');
-                        URL::redirecionar('usuarios/login');
+                        Url::redirecionar('usuarios/login');
                  
                     }else{
                         die("Erro ao armazenar o usuário no banco de dados");
@@ -130,7 +214,7 @@ class Usuarios extends Controller{
         $_SESSION['usuario_nome'] = $usuario->nome;
         $_SESSION['usuario_email'] = $usuario->email;
 
-        URL::redirecionar('posts');
+        Url::redirecionar('posts');
 
     }
 
@@ -142,7 +226,7 @@ class Usuarios extends Controller{
         
         session_destroy();   
 
-        URL::redirecionar('usuarios/login');
+        Url::redirecionar('usuarios/login');
         
     }
 
