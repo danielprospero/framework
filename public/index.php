@@ -6,68 +6,22 @@ include '../app/configuracao.php';
 include '../app/autoload.php';
 
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
+<head> 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= APP_NOME ?></title>
-    <link rel="stylesheet" href="<?= URL ?>/public/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="<?= URL ?>/public/bootstrap/icons/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="<?= URL ?>/public/css/estilo.css">
+    <link href="<?= URL ?>/public/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?= URL ?>/public/bootstrap/icons/bootstrap-icons.min.css" rel="stylesheet">
     <script src="<?= URL ?>/public/js/color-modes.js"></script>
-    <script src="<?= URL ?>/public/js/funcoes.js"></script>
-
-    <style>
-
-      .bi {
-        vertical-align: -.125em;
-        fill: currentColor;
-      }
-
-      .nav-scroller {
-        position: relative;
-        z-index: 2;
-        height: 2.75rem;
-        overflow-y: hidden;
-      }
-
-      .nav-scroller .nav {
-        display: flex;
-        flex-wrap: nowrap;
-        padding-bottom: 1rem;
-        margin-top: -1px;
-        overflow-x: auto;
-        text-align: center;
-        white-space: nowrap;
-        -webkit-overflow-scrolling: touch;
-      }
-
-      .btn-bd-primary {
-        --bd-violet-bg: #712cf9;
-        --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
-
-        --bs-btn-font-weight: 600;
-        --bs-btn-color: var(--bs-white);
-        --bs-btn-bg: var(--bd-violet-bg);
-        --bs-btn-border-color: var(--bd-violet-bg);
-        --bs-btn-hover-color: var(--bs-white);
-        --bs-btn-hover-bg: #6528e0;
-        --bs-btn-hover-border-color: #6528e0;
-        --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
-        --bs-btn-active-color: var(--bs-btn-hover-color);
-        --bs-btn-active-bg: #5a23c8;
-        --bs-btn-active-border-color: #5a23c8;
-      }
-
-
-
-    </style>
-
+    <link href="<?= URL ?>/public/css/estilo.css" rel="stylesheet">
 </head>
 <body>
 
-    <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+    <!-- Inicio do função para o tema dark -->
+    <svg xmlns="" class="d-none">
       <symbol id="check2" viewBox="0 0 16 16">
         <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
       </symbol>
@@ -118,33 +72,22 @@ include '../app/autoload.php';
         </li>
       </ul>
     </div>
-
-    
-    <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
-    <symbol id="aperture" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24">
-        <circle cx="12" cy="12" r="10"/>
-        <path d="M14.31 8l5.74 9.94M9.69 8h11.48M7.38 12l5.74-9.94M9.69 16L3.95 6.06M14.31 16H2.83m13.79-4l-5.74 9.94"/>
-    </symbol>
-    <symbol id="cart" viewBox="0 0 16 16">
-        <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-    </symbol>
-    <symbol id="chevron-right" viewBox="0 0 16 16">
-        <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
-    </symbol>
-    </svg>
+    <!-- Fim do função para o tema dark -->
 
 <?php
+
+
+    $dados = [ 'item1', 'item2', 'item3'];
 
     include APP . '/Views/topo.php';
     $rota = new Rota();
     include APP . '/Views/rodape.php';
 
 ?>
-
     <script src="<?= URL ?>/public/bootstrap/js/jquery.js"></script>
     <script src="<?= URL ?>/public/bootstrap/js/bootstrap.min.js"></script>
-    <script src="<?= URL ?>/public/js/funcoes.js"></script>
     <script src="<?= URL ?>/public/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="<?= URL ?>/public/js/funcoes.js"></script>
 
 </body>
 </html>

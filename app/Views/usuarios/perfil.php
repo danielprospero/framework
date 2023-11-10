@@ -1,12 +1,29 @@
 <div class="container my-3">
-
-    <div class="card">
+    <div class="card text-bg-tertiary border-3">
         <?= Sessao::mensagem('usuario') ?>
         <div class="row">
             <div class="col-md-4">
                 <div class="card m-3">
-                    <div class="card-header bg-secondary">
-                        <h5 class="card-text text-center"><?= $dados['nome'] ?></h5>
+                    <div class="my-2">
+                        <label class="d-block">
+                            <img class="mx-auto d-block image-preview-edit" src="<?= URL ?>/public/<?= $dados['imagem'] ?>" style="cursor: pointer;width: 150px;height: 150px;object-fit: cover;">
+                            <input onchange="display_image_edit(this.files[0])" type="file" name="imagem" class="d-none">
+                        </label>
+                        <?php if(!empty($dados['imagem_erro'])):?>
+                            <div class="text-danger"><?=$dados['imagem_erro']?></div>
+                        <div class="text-danger"><?=$dados['imagem_erro']?></div>
+                        <?php endif;?>
+
+                        <script>
+                            
+                            function display_image_edit(file)
+                            {
+                                document.querySelector(".image-preview-edit").src = URL.createObjectURL(file);
+                            }
+                        </script>
+                    </div>
+                    <div class="card-header bg-body-dark border-3 pt-3 text-center align-items-center">
+                        <h5 class="card-title text-center"><?= $dados['nome'] ?></h5>
                     </div>
                     <div class="card-body">
                         <p class="card-text"><?= $dados['biografia'] ?></p>
@@ -15,60 +32,42 @@
             </div>
             <div class="col-md-8">
                 <div class="card m-3">
-                    <div class="card-header bg-secondary">
+                    <div class="card-header bg-body-tertiary rounded-3">
                         Dados Pessoais
                     </div>
                     <div class="card-body">
 
                         <form name="atualizar" method="POST" action="<?= URL ?>/usuarios/perfil/<?= $dados['id'] ?>">
-                             <?php if (!empty($dados['nome_erro']) || !empty($dados['email_erro']) || !empty($dados['senha_erro']) || !empty($dados['confirma_senha_erro']) || !empty($dados['termos_erro'])):?>
-                                <div class="alert alert-danger">Por favor, corrija os erros abaixo</div>
-                            <?php endif;?>
-
                             <div class="form-floating">
-                                <input value="<?=$dados['nome']?>" name="nome" type="text" class="form-control" id="floatingInput" placeholder="Nome do usuário">
-                                <label for="floatingInput">Nome de usuário </label>
+                                <input value="<?= $dados['nome'];?>" name="nome" type="text" class="form-control mb-2" id="floatingInput" placeholder="Nome" <?= $dados['nome_erro'] ? 'is-invalid' : '' ?>>
+                                <label for="floatingInput">Nome de usuário</label>
+                                <div class="invalid-feedback">
+                                    <?= $dados['nome_erro'] ?>
+                                </div>
                             </div>
-
-                            <?php if (!empty($dados['nome_erro'])):?>
-                                <div class="alert alert-danger"><?=$dados['nome_erro']?></div>
-                            <?php endif;?>
-
                             <div class="form-floating">
-                                <input value="<?=$dados['email']?>" name="email" type="email" class="form-control mb-0 rounded-2" id="floatingInput" placeholder="name@example.com">
+                                <input value="<?= $dados['email'];?>" name="email" type="email" class="form-control mb-2" id="floatingInput" placeholder="Email" <?= $dados['email_erro'] ? 'is-invalid' : '' ?>>
                                 <label for="floatingInput">Email</label>
+                                <div class="invalid-feedback">
+                                    <?= $dados['email_erro'] ?>
+                                </div>
                             </div>
-
-                            <?php if (!empty($dados['email_erro'])):?>
-                                <div class="alert alert-danger"><?=$dados['email_erro']?></div>
-                            <?php endif;?>
+                        
 
                             <div class="form-floating">
-                                <input name="senha" type="password" class="form-control rounded-3" id="floatingPassword" placeholder="Senha">
-                                <label for="floatingPassword">Senha</label>
+                                <input type="password" name="senha" id="floatingInput" class="form-control mb-2" placeholder="senha" <?= $dados['senha_erro'] ? 'is-invalid' : '' ?>>
+                                <label for="floatingInput">Senha</label>
+                                <div class="invalid-feedback">
+                                    <?= $dados['senha_erro'] ?>
+                                </div>
                             </div>
-
-                            <?php if (!empty($dados['senha_erro'])):?>
-                                <div class="alert alert-danger"><?=$dados['senha_erro']?></div>
-                            <?php endif;?>
 
                             <div class="form-floating">
-                                <input name="confirma_senha" type="password" class="form-control rounded-3" id="floatingPassword" placeholder="Confirmar Senha">
-                                <label for="floatingPassword">Confirmar Senha</label>
+                                <textarea name="biografia" id="floatingInput" class="form-control" rows="15" placeholder="biografia"><?= $dados['biografia'] ?></textarea>
+                                <label for="floatingInput">Biografia</label>
                             </div>
 
-                            <?php if (!empty($dados['confirma_senha_erro'])):?>
-                                <div class="alert alert-danger"><?=$dados['confirma_senha_erro']?></div>
-                            <?php endif;?>
-    
-
-                            <div class="form-outline">
-                                <textarea name="biografia" id="biografia" class="form-control"  placeholder="Biografia"  rows="5"><?=$dados['biografia']?></textarea>
-                            </div>
-
-                            <!-- <input type="submit" value="Atualizar" data-toggle="tooltip" title="Atualizar Dados do Perfil" class="btn btn-primary"> -->
-                            <button class="btn btn-primary w-100 py-2 mt-4" value="Atualizar" type="submit">Atualizar</button>
-
+                            <input type="submit" value="Atualizar" data-toggle="tooltip" title="Atualizar Dados do Perfil" class="btn btn-primary mt-3">
 
                         </form>
                     </div>
