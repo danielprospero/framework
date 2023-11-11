@@ -1,7 +1,7 @@
 
 
 <h4>Usuários 
-        <a href="<?=URL?>/admin/usuarios/cadastrar">
+        <a href="<?=URL?>/admin/cadastrar/usuario">
             <button class="btn btn-primary">Adicionar novo</button>
         </a>
     </h4>
@@ -38,10 +38,10 @@
                         <td><?=Checa::dataBr($usuario->usuarioDataCadastro)?></td>
                         <td><?php if(Checa::dataBr($usuario->usuarioDataModificado) != null){ echo Checa::dataBr($usuario->usuarioDataModificado); }else{ echo 'Não modificado'; } ?></td>
                         <td>
-                            <a href="<?=URL?>/admin/usuarios/editar/<?=$usuario->usuarioId?>">
+                            <a href="<?=URL?>/admin/editar/usuario<?=$usuario->usuarioId?>">
                                 <button class="btn btn-warning text-white btn-sm"><i class="bi bi-pencil-square"></i></button>
                             </a>
-                            <a href="<?=URL?>/admin/usuarios/deletar/<?=$usuario->id?>">
+                            <a href="<?=URL?>/admin/deletar/usuario<?=$usuario->id?>">
                                 <button class="btn btn-danger btn-sm"><i class="bi bi-trash-fill"></i></button>
                             </a>
                         </td>

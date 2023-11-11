@@ -16,7 +16,7 @@
         </nav>
     </div>
 
-    <form nome="editar" action="<?=URL?>/posts/editar<?=$dados['slug']?>" method="post" class="w-100">
+    <form nome="editar" enctype="multipart/form-data" action="<?=URL?>admin/editar/post<?=$dados['slug']?>" method="post" class="w-100">
 
         <h1 class="h3 mb-3 mt-3 fw-normal">Editar Post</h1>
 

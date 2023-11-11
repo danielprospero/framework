@@ -1,5 +1,5 @@
  <h4>Categorias 
-        <a href="<?=URL?>/admin/categorias/add">
+        <a href="<?=URL?>/admin/cadastrar/categoria">
             <button class="btn btn-primary">Adicionar nova</button>
         </a>
     </h4>
@@ -26,10 +26,10 @@
                         <td><?=Checa::dataBr($categoria->categoriaCriado)?></td>
                         <td><?php if(Checa::dataBr($categoria->categoriaModificado) != null) {echo Checa::dataBr($categoria->categoriaModificado);} else {echo "Não modificado";}?></td>
                         <td>
-                            <a href="<?=URL?>/admin/categorias/editar/<?=$categoria->categoriaId?>">
+                            <a href="<?=URL?>/admin/editar/categoria<?=$categoria->categoriaId?>">
                                 <button class="btn btn-warning text-white btn-sm"><i class="bi bi-pencil-square"></i></button>
                             </a>
-                            <a href="<?=URL?>/admin/categorias/deletar/<?=$categoria->categoriaId?>">
+                            <a href="<?=URL?>/admin/deletar/categoria<?=$categoria->categoriaId?>">
                                 <button class="btn btn-danger btn-sm"><i class="bi bi-trash-fill"></i></button>
                             </a>
                         </td>

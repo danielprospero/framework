@@ -1,5 +1,5 @@
 <h4>Postagens 
-        <a href="<?=URL?>/admin/posts/cadastrar">
+        <a href="<?=URL?>/admin/cadastrar/post">
             <button class="btn btn-primary">Cadastrar novo</button>
         </a>
     </h4>
@@ -30,10 +30,10 @@
                         <td><?=Checa::dataBr($post->postDataCadastro)?></td>
                         <td><?php if(Checa::dataBr($post->postDataModificado) != null){ echo Checa::dataBr($post->postDataModificado); }else{ echo 'Não modificado'; } ?></td>
                         <td>
-                            <a href="<?=URL?>/admin/postagens/edit/<?=$row['id']?>">
+                            <a href="<?=URL?>/admin/editar/post<?=$row['id']?>">
                                 <button class="btn btn-warning text-white btn-sm"><i class="bi bi-pencil-square"></i></button>
                             </a>
-                            <a href="<?=URL?>/admin/postagens/delete/<?=$row['id']?>">
+                            <a href="<?=URL?>/admin/deletar/post<?=$row['id']?>">
                                 <button class="btn btn-danger btn-sm"><i class="bi bi-trash-fill"></i></button>
                             </a>
                         </td>

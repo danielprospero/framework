@@ -71,7 +71,7 @@ class Categoria extends Controller {
             ];
         }
 
-        $this->view('categoria/cadastrar', $dados);
+        $this->view('admin/categoria/cadastrar', $dados);
     }
 
     public function listaPostPorCategoria($slug){

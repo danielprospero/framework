@@ -16,7 +16,7 @@
         </nav>
     </div>
 
-    <form nome="cadastrar" action="<?=URL?>/posts/cadastrar" method="post" class="w-100">
+    <form nome="cadastrar" enctype="multipart/form-data" action="<?=URL?>admin/cadastrar/posts" method="post" class="w-100">
 
         <h1 class="h3 mb-3 mt-3 fw-normal">Cadastrar Postagem</h1>
 
