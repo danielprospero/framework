@@ -32,7 +32,11 @@ class PostModel {
     }
 
     public function armazenar($dados){
+
+        $dados['slug'] = $this->checarTitulo($dados['titulo']);
+
         $this->db->query("INSERT INTO posts (usuario_id, categoria_id, titulo, descricao, conteudo, imagem ) VALUES (:usuario_id, :categoria_id, :titulo, :descricao, :conteudo, :imagem)");
+        
         $this->db->bind(":usuario_id", $dados['usuario_id']);
         $this->db->bind(":categoria_id", $dados['categoria_id']);
         $this->db->bind(":titulo", $dados['titulo']);
@@ -48,6 +52,9 @@ class PostModel {
     }
 
     public function atualizar($dados){
+
+        $dados['slug'] = $this->checarTitulo($dados['titulo']);
+
         $this->db->query("UPDATE posts SET usuario_id = :usuario_id, categoria_id = :categoria_id, titulo = :titulo, descricao = :descricao, conteudo = :conteudo, imagem = :imagem, slug = :slug, modificado_em = NOW() WHERE id = :id");
 
         $this->db->bind(":id", $dados['id']);  
@@ -100,6 +107,7 @@ class PostModel {
                             usuarios.id as usuarioId,
                             categorias.categoria as categoriaNome,
                             posts.titulo as postTitulo,
+                            posts.categoria_id as categoriaId,
                             posts.descricao as postDescricao,
                             posts.conteudo as postConteudo,
                             posts.imagem as postImagem,
@@ -137,6 +145,21 @@ class PostModel {
         $this->db->bind(":categoria_id", $categoria_id);
         return $this->db->resultados();
 
+    }
+
+    public function checarTitulo($titulo, $id = null){
+
+        $sql = (!empty($id) ? "id != {$id} AND" : "");
+
+        $this->db->query("SELECT titulo FROM {$this->tabela} WHERE {$sql} titulo = :titulo");
+        $this->db->bind(":titulo", $titulo);
+        $this->db->executa();
+
+        if($this->db->resultado()){
+            return URL::urlAmigavel($titulo) . '-' . substr(uniqid(), 8);
+        } else {
+            return URL::urlAmigavel($titulo);
+        }
     }
 
 }

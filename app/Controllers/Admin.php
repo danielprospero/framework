@@ -8,6 +8,10 @@ class Admin extends Controller {
         $this->categoriaModel = $this->model('CategoriaModel');
         $this->usuarioModel = $this->model('UsuarioModel');
 
+        //adiciona os metodos do model as variaveis 
+        $this->posts = $this->postModel->listarPosts();
+        $this->categorias = $this->categoriaModel->listarCategorias();
+
         $admin = $this->usuarioModel->listarAdmin();
         if(!$admin->acesso_id == $_SESSION['usuario_acesso_id']){
             session_destroy();
@@ -69,14 +73,14 @@ class Admin extends Controller {
         }
     }
 
-    private function cadastrarPost(){
+    public function cadastrarPost(){
         $formulario = filter_input_array(INPUT_POST, FILTER_DEFAULT);
         if(isset($formulario)){
             $dados = [
                 'titulo' => trim($formulario['titulo']),
                 'slug' => trim($formulario['slug']),
-                'texto' => trim($formulario['texto']),
-                'categoria_id' => trim($formulario['categoria_id']),
+                'descricao' => trim($formulario['descricao']),
+                'categoria_id' => trim($formulario['categoriaNome']),
                 'status_post_id' => trim($formulario['status_post_id']),
                 'imagem' => $_FILES['imagem'],
                 'categoria_error' => '',
@@ -106,8 +110,9 @@ class Admin extends Controller {
             $dados = [
                 'titulo' => '',
                 'slug' => '',
-                'texto' => '',
-                'categoria_id' => '',
+                'descricao' => '',
+                'conteudo' => '',
+                'categorias' => $this->categorias,
                 'status_post_id' => '',
                 'imagem' => '',
                 'categoria_error' => '',
@@ -115,7 +120,8 @@ class Admin extends Controller {
                 'slug_error' => ''
             ];
         }
-        $this->view('admin/post/cadastrar', $dados);
+
+        $this->view('admin/posts/cadastrar', $dados);
     }
 
     private function cadastrarCategoria(){
@@ -218,7 +224,7 @@ class Admin extends Controller {
         $this->view('admin/usuario/cadastrar', $dados);
     }
 
-    private function editarPost($id){
+    private function editarPost($slug){
         $formulario = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 
         if(isset($formulario)){
@@ -226,8 +232,8 @@ class Admin extends Controller {
                 'id' => $id,
                 'titulo' => trim($formulario['titulo']),
                 'slug' => trim($formulario['slug']),
-                'texto' => trim($formulario['texto']),
-                'categoria_id' => trim($formulario['categoria_id']),
+                'conteudo' => trim($formulario['conteudo']),
+                'categoria_id' => trim($formulario['categoria']),
                 'status_post_id' => trim($formulario['status_post_id']),
                 'imagem' => $_FILES['imagem'],
                 'categoria_error' => '',
@@ -254,20 +260,22 @@ class Admin extends Controller {
                 }
             }
         }else{
-            $post = $this->postModel->lerPostPorId($id);
+            $post = $this->postModel->listarPostPorSlug($slug);
             $dados = [
                 'id' => $post->postId,
                 'titulo' => $post->postTitulo,
+                'descricao' => $post->postDescricao,
                 'slug' => $post->postSlug,
-                'texto' => $post->postTexto,
+                'conteudo' => $post->postConteudo,
                 'categoria_id' => $post->categoriaId,
-                'status_post_id' => $post->statusPostId,
                 'imagem' => $post->postImagem,
                 'categoria_error' => '',
                 'titulo_error' => '',
                 'slug_error' => ''
             ];
         }
+
+        $this->view('admin/posts/editar', $dados);
     }
 
     private function editarCategoria($id){

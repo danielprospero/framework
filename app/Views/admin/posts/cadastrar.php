@@ -9,20 +9,20 @@
                     </a>
                 </li>
                 <li class="breadcrumb-item">
-                    <a class="link-body-emphasis fw-semibold text-decoration-none" href="<?=URL?>/posts"></a>
+                    <a class="link-body-emphasis fw-semibold text-decoration-none" href="<?=URL?>/post"></a>
                     Posts
                 </li>
             </ol>
         </nav>
     </div>
 
-    <form nome="cadastrar" enctype="multipart/form-data" action="<?=URL?>admin/cadastrar/posts" method="post" class="w-100">
+    <form nome="cadastrar" enctype="multipart/form-data" action="<?=URL?>admin/cadastrar/post" method="post" class="w-100">
 
         <h1 class="h3 mb-3 mt-3 fw-normal">Cadastrar Postagem</h1>
 
         <div class="my-2">
 	    	<label class="d-block">
-	    		<img class="mx-auto d-block image-preview-edit" src="<?php Checa::pegarImagem('')?>" style="cursor: pointer;width: 150px;height: 150px;object-fit: cover;">
+	    		<img class="mx-auto d-block image-preview-edit" src="<?= Checa::pegarImagem('')?>" style="cursor: pointer;width: 150px;height: 150px;object-fit: cover;">
 	    		<input onchange="display_image_edit(this.files[0])" type="file" name="imagem" class="d-none">
 	    	</label>
 	    	<?php Sessao::mensagem('imagem_error', 'Selecione uma imagem', 'alert alert-danger'); ?>
@@ -62,7 +62,7 @@
             <select name="categorias" class="form-select" id="floatingSelect" aria-label="Floating label select example">
                 <option value="" selected>Selecione uma categoria</option>
                 <?php foreach($dados['categorias'] as $categoria): ?>
-                    <option <?php if($dados['categoria_id'] == $categoria->categoriaNome) echo 'selected' ?> value="<?=$categoria->categoriaId?>"><?=$categoria->categoriaNome?></option>
+                    <option value="<?=$categoria->categoriaId?>"><?=$categoria->categoriaNome?></option>
                 <?php endforeach ?>
             </select>
             <label for="floatingSelect">Categoria</label>

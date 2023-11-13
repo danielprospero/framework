@@ -30,10 +30,10 @@
                         <td><?=Checa::dataBr($post->postDataCadastro)?></td>
                         <td><?php if(Checa::dataBr($post->postDataModificado) != null){ echo Checa::dataBr($post->postDataModificado); }else{ echo 'Não modificado'; } ?></td>
                         <td>
-                            <a href="<?=URL?>/admin/editar/post<?=$row['id']?>">
+                            <a href="<?=URL?>/admin/editar/post/<?=$post->postSlug?>">  
                                 <button class="btn btn-warning text-white btn-sm"><i class="bi bi-pencil-square"></i></button>
                             </a>
-                            <a href="<?=URL?>/admin/deletar/post<?=$row['id']?>">
+                            <a href="<?=URL?>/admin/deletar/post/<?=$post->postSlug?>">
                                 <button class="btn btn-danger btn-sm"><i class="bi bi-trash-fill"></i></button>
                             </a>
                         </td>

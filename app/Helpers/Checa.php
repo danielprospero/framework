@@ -33,7 +33,7 @@ class Checa {
             return URL . '/' . $imagem;
         } 
             
-        return URL . '/public/img/sem-imagem.png';
+        return URL . '/public/img/sem-foto.jpg';
     }
 
     public static function checarImagem($imagem){

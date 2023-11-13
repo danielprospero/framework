@@ -76,9 +76,6 @@ include '../app/autoload.php';
 
 <?php
 
-
-    $dados = [ 'item1', 'item2', 'item3'];
-
     include APP . '/Views/topo.php';
     $rota = new Rota();
     include APP . '/Views/rodape.php';

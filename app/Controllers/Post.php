@@ -177,7 +177,7 @@ class Post extends Controller {
                 'conteudo' => $post->postConteudo,
                 'imagem' => $post->postImagem,
                 'slug' => $post->postSlug,
-                'categorias' => $categorias,
+                'categorias' => $this->categorias,  
                 'modificado_em' => '',
                 'usuario_id_error' => '',
                 'categoria_id_error' => '',

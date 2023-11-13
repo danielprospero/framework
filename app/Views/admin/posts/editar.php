@@ -1,3 +1,8 @@
+<?php
+echo "<pre>";
+print_r($dados);
+echo "</pre>";
+?>
 <div class="col-md-6 mx-auto">
 
     <div class="mt-3 mb-3">
@@ -69,7 +74,7 @@
             <select name="categoria_id" class="form-select" id="floatingSelect" aria-label="Floating label select example">
                 <option value="" selected>Selecione uma categoria</option>
                 <?php foreach($dados['categorias'] as $categoria): ?>
-                    <option <?php if($dados['categoria_id'] == $categoria->categoriaNome) echo 'selected' ?> value="<?=$categoria->categoriaId?>"><?=$categoria->categoriaNome?></option>
+                    <option <?php if($dados['categoria_id'] == $post->categoriaNome) echo 'selected' ?> value="<?=$categoria->categoriaId?>"><?=$categoria->categoriaNome?></option>
                 <?php endforeach ?>
             </select>
             <label for="floatingSelect">Categoria</label>

@@ -106,7 +106,7 @@ switch($pagina){
                 
             <?php 
 
-                require_once $pagina;
+                require_once $pagina;    
 
             ?>
 

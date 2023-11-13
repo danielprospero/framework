@@ -16,13 +16,13 @@ class Controller {
     //cerrega as views
     public function view($view, $dados = []){
         $arquivo = ('../app/Views/'.$view.'.php');
-        if(file_exists($arquivo)):
+        if(file_exists($arquivo)){
             //requere o arquivo de view
             require_once $arquivo;
-        else:
+        }else{
             //a função die() termina a execução do script
             die('O arquivo de view não existe!');
-        endif;
+        }
     }
 
 }

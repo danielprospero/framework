@@ -145,6 +145,7 @@ class Usuario extends Controller{
         $_SESSION['usuario_id'] = $usuario->id;
         $_SESSION['usuario_nome'] = $usuario->nome;
         $_SESSION['usuario_email'] = $usuario->email;
+        $_SESSION['usuario_imagem'] = $usuario->imagem;
         $_SESSION['usuario_acesso_id'] = $usuario->acesso_id;
 
         URL::redirecionar('posts');

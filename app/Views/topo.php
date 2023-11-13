@@ -31,7 +31,7 @@
                         <?php if(isset($_SESSION['usuario_id'])): ?>
                             <div class="dropdown">
                                 <a href="#" class="d-block link-body-emphasis dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <img src="<?=URL?>/public/img/daniel-sorrindo.jpeg" alt="mdo" width="32" height="32" class="rounded-circle">
+                                    <img src="<?=URL?>/<?=$_SESSION['usuario_imagem'];?>" alt="Foto de perfil" width="32" height="32" class="rounded-circle">
                                 </a>
                                 <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
                                     <li><a class="dropdown-item" href="<?=URL?>/usuario/perfil/<?=$_SESSION['usuario_id']?>">Perfil</a></li>
