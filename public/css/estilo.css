@@ -44,3 +44,14 @@ padding: 15px;
 margin: auto;
 }
 /* Fim do estilo tela cadastro de usuario */
+
+/* Inicio do estilo resume texto */
+.caixa-texto {
+    display: none;
+    position: absolute;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+ /* Fim do estilo resume texto */

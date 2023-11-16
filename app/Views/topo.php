@@ -17,9 +17,8 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle <?=$url[0] == 'categoria' ? 'link-secondary' : 'link-body-emphasis'?>" href="#" data-bs-toggle="dropdown" aria-expanded="false">Categoria</a>
                             <ul class="dropdown-menu text-small">
-                                <?php var_dump($dados); ?>
                                 <?php foreach($dados['categorias'] as $categoria): ?>
-                                    <li><a class="dropdown-item" href="<?=URL?>/categorias/<?=$categoria['slug']?>"><?=$categoria['nome']?></a></li>
+                                    <li><a class="dropdown-item" href="<?=URL?>/categorias/<?=$categoria->slug?>"><?=$categoria->categoria?></a></li>
                                 <?php endforeach; ?>
                             </ul>
                         </li>

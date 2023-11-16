@@ -1,3 +1,5 @@
+<?php include_once (APP . '/Views/topo.php'); ?>
+
 <div class="section mt-5" id="our-classes">
         <div class="container">
             <div class="row">
@@ -99,3 +101,5 @@
         </div>
     </div>
 </div>
+
+<?php include_once APP . '/Views/rodape.php';

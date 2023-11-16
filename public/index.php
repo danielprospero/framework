@@ -76,10 +76,8 @@ include '../app/autoload.php';
 
 <?php
 
-    include APP . '/Views/topo.php';
     $rota = new Rota();
-    include APP . '/Views/rodape.php';
-
+    
 ?>
     <script src="<?= URL ?>/public/bootstrap/js/jquery.js"></script>
     <script src="<?= URL ?>/public/bootstrap/js/bootstrap.min.js"></script>

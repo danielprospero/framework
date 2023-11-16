@@ -2,6 +2,10 @@
 
 class Admin extends Controller {
 
+    private $postModel;
+    private $categoriaModel;
+    private $usuarioModel;
+
     public function __construct() {
 
         $this->postModel = $this->model('PostModel');
